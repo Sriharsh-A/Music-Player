@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-container {
+      background-color: mediumslateblue;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .signup-container input[type="text"],
+    .signup-container input[type="email"],
+    .signup-container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .signup-container input[type="submit"] {
+      width: 100%;
+      background-color: black;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .signup-container input[type="submit"]:hover {
+      background-color: white;
+      font-size: 18 px;
+      color: black;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    .success-message {
+      color: white;
+      margin-top: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    <form id="signup-form" action="">
+      <input type="text" id="fullname" name="fullname" placeholder="Full Name" required>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+      <input type="submit" value="Sign Up">
+    </form>
+    <p class="error-message" id="error-message"></p>
+    <p class="success-message" id="success-message"></p>
+  </div>
+
+  <script>
+    document.getElementById("signup-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get input values
+      var fullName = document.getElementById("fullname").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirm-password").value;
+
+      // Validate email format
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById("error-message").textContent = "Invalid email address";
+        return; // Exit function if email is invalid
+      }
+
+      // Validate password length
+      if (password.length < 8) {
+        document.getElementById("error-message").textContent = "Password must be at least 8 characters long";
+        return; // Exit function if password is too short
+      }
+
+      // Validate password confirmation
+      if (password !== confirmPassword) {
+        document.getElementById("error-message").textContent = "Passwords do not match";
+        return; // Exit function if passwords do not match
+      }
+
+      // If all validations pass, display success message
+      document.getElementById("success-message").textContent = "Sign up successful!";
+      // You can also perform further actions, such as submitting the form data to a server
+      // For this example, we're just logging the form data to the console
+      console.log("Full Name:", fullName);
+      console.log("Email:", email);
+      console.log("Password:", password);
+    });
+  </script>
+</body>
+</html>
